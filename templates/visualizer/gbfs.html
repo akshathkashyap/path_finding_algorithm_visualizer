@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "visualizer/base.html" %}
+  {% block title_block %}gbfs{% endblock %}
+
+  {% block body_block %}
+    <div id="gbfs_title">
+      <h1 id="fade-title" class="display-3">Greedy Best First Search</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row row-cols-2">
+        <div class="col">
+          <h1 class="display-6">What is it?</h1>
+        </div>
+        <div class="col">
+          <h1 class="display-6">and how does it work?</h1>
+        </div>
+        <div class="col">
+          <p class="lead">With that negative ring to its name you might be wondering what it does to deserve it. Technically the Greedy Best algorithm is similar to the A* algorithm in a lot of ways. In fact there are just 2 technical points that distinguish these algorithms from one another. (Please read the A* description if you haven’t yet) The A* algorithm keeps in mind the distance already travelled from the starting point where as the GBFS lives completely in the moment so to speak. It doesn’t care about the previous data, all it cares about is how it moves forward from its current position. We all have a colleague like this, don’t we? Hence the greedy best search continuously keeps moving towards the destination node without thinking if it has made any mistakes getting there.</p>
+          <p class="lead">Now due to this greedy approach, this algorithm might always find a way to the destination but much like in real-life it might sometimes ends up taking a longer route. Because if we are being honest, life isn’t just all about ambition.</p>
+        </div>
+        <div class="col">
+          <p class="lead">Just like in A*, Greedy Best First works by creating a lowest cost tree-diagram for every node it visits and then continues with the node that has the least heuristic value or in simpler words is closer to the destination. This process is repeated till the algorithm reaches its destination.</p>
+          <p class="lead">GBFS uses 2 functions f(n) and h(n) unlike A*, and here f(n)=h(n). The f(n) is the total estimated cost from the starting point to destination through n, and h(n) is the estimated cost from n to the destination.</p>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

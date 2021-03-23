@@ -1,0 +1,1 @@
+web: gunicorn pathfinding_algorithm_visualizer.wsgi --log-file -

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "visualizer/base.html" %}
+{% load static %}
+  {% block title_block %}Home{% endblock %}
+
+  {% block body_block %}
+    <div id="index_title">
+      <h1 id="fade-title" class="display-3">Welcome,<br>to the <b>Path Finding Algorithm Visualizer</b> Project</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row row-cols-2">
+        <div class="col">
+          <h1 class="display-6">Hey Geeks, Welcome to the land of Path Finding algorithms</h1>
+        </div>
+        <div class="col">
+          <h1 class="display-6">How does this site work?</h1>
+        </div>
+        <div class="col">
+          <p class="lead">Have you ever used Uber for a quick ride, or maybe Google Maps when you finally get your hands on that driving license (hopefully)? Or maybe you’ve ordered a late night snack on Zomato. What do all these apps have in common? You guessed it, live tracking GPS. The magical entity that helps people understand routes or get the ETA of the food they are craving. But have you ever stopped to wonder how it gives you optimal travelling routes, from one destination to another along with the time needed to reach said destination, without breaking a sweat? The GPS uses a highly sophisticated version of what’s called a Path Finding algorithm.</p>
+          <p class="lead">There are quite a few versions of this algorithm created to read a map and give us the best route from one place to another depending on our specific need for the journey: shortest distance, least time to travel, avoid certain routes or try to stop by a mini-destination.</p>
+          <p class="lead">Now if you were to read about these algorithms in detail, you might take a few hours to understand their working depending on how much you like maths and how good your visualization skills are. But a much quicker way is to get a visualizer to illustrate the working of these pathfinding algorithms in real-time. That’s our project! Go ahead, it’s all yours to explore, and what’s exciting is that you can even create your own environment!</p>
+        </div>
+        <div class="col">
+          <p class="lead">Every cell (node) on this dynamic map is basically referenced in the path-finding algorithm as a function. The nodes that aren’t visited will be stored as open functions while the visited nodes hold a certain value within them as a function. This value depends on the specific algorithm being used. The closed functions are usually an arithmetic manipulation of the cost of those nodes (Traffic) along with the distance of that node from the destination node and the starting node. For the wall nodes the cost is infinite.</p>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

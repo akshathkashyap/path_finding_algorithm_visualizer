@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends "visualizer/base.html" %}
+  {% block title_block %}astar{% endblock %}
+
+  {% block body_block %}
+    <div id="astar_title">
+      <h1 id="fade-title" class="display-3">A-Star</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row row-cols-2">
+        <div class="col">
+          <h1 class="display-6">What is it?</h1>
+        </div>
+        <div class="col">
+          <h1 class="display-6">and how does it work?</h1>
+        </div>
+        <div class="col">
+          <p class="lead">This algorithm is a slightly smart one. A* is like one of those backbenchers in school who seem to score well without studying. The secret ingredient is obviously cheating! (Don’t take that literally)</p>
+          <p class="lead">The way A* accomplishes its task is that it beforehand picks up the heuristic distance (The absolute distance between 2 points regardless of the paths or obstacles between them) between the starting point and the destination. Now once it knows the heuristic value, it doesn’t have to explore every possible path to figure out a way towards the destination. Hence, soon as it calculates the heuristic distance it starts making decisions entirely based on a very simple question. Is this path taking me closer to my goal? Poetic, eh! To explain it in a technical way, the A* scans all possible nodes from the starting point but then continues with only those nodes that contain the least heuristic value  or in other words which reduce the absolute distance from the starting point to the destination and in the least number of computational cycles. This process is repeated till the A* reaches its destination at which point the most efficient path that was taken is highlighted as the output.</p>
+          <p class="lead">With this approach A* uses comparatively lesser memory storage since it doesn’t travel every possible path which in turn also reduces the computational time, which might be a matter of micro-seconds when it comes to computer computation speed but that still makes a difference when its used on a large scale.</p>
+        </div>
+        <div class="col">
+          <p class="lead">The A* works by calculating the lowest cost tree diagram for every node it visits. It scans all possible nodes from the starting point but then continues with only those nodes that contain the least heuristic value or in other words which reduce the absolute distance from the starting point to the destination and in the least number of computational cycles. This process is repeated till the A* reaches its destination at which point the most efficient path that was taken is highlighted as the output.</p>
+          <p class="lead">The A*makes use of 3 functions mainly, f(n), g(n) and h(n), where f(n)=g(n)+h(n)</p>
+          <p class="lead">Now f(n) is the total estimated cost of path to the destination through node n, g(n) is the cost so far to reach node n and h(n) is the heuristic value which gives us the estimated cost from node n to the destination. Hence the f(n) of every node is calculated and compared with all corresponding nodes’ f(n) to select the successor node.</p>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

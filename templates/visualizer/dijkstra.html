@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends "visualizer/base.html" %}
+  {% block title_block %}dijkstra{% endblock %}
+
+  {% block body_block %}
+    <div id="dijkstra_title">
+      <h1 id="fade-title" class="display-3">Dijkstra</h1>
+    </div>
+    <div class="container-fluid">
+      <div class="row row-cols-2">
+        <div class="col">
+          <h1 class="display-6">What is it?</h1>
+        </div>
+        <div class="col">
+          <h1 class="display-6">and how does it work?</h1>
+        </div>
+        <div class="col">
+          <p class="lead">This is the first path finding algorithm you will come across in the Path-finding world. Dijkstra might be one of the most basic shortest path finding algorithm out of all that are available. But don’t let that fool you into believing that it isn’t as accurate as others. It might take a longer time but it gives us the best route possible for sure.</p>
+          <p class="lead">The logic of this algorithm is the same as water. Imagine continuously pouring water into a maze, wouldn’t the water eventually find its way out? It definitely will, but it’s not because of some prolific decision making. The water just mindlessly flows in all possible direction and eventually finds one way that works. This is exactly what Dijkstra does. It goes through all possible directions and paths till it reaches the destination. Soon as it reaches the destination the shortest and most efficient path till that point is given to us as the best path for that destination.</p>
+          <p class="lead">So as you may have already deduced, Dijkstra might not be the perfect algorithm for you if you want to use minimal memory space and least computational time, but it can definitely work as a gateway to understanding all the other algorithms out there.</p>
+        </div>
+        <div class="col">
+          <p class="lead">The Dijkstra algorithm functions by calculating distance of every node it visits from the starting node. The algorithm visits corresponding nodes from its starting node and sets a distance calculated from the starting point, then for every adjacent node from the current node a tentative distance is calculated from the starting node and through the current node. This value is made permanent if the pre-assigned value for the node in question is more than the tentative value otherwise the original value of that node is retained. Once all the adjacent nodes are given permanent distance values the algorithm moves to the next adjacent node.</p>
+          <p class="lead">Hence the algorithm keeps doing this for every node till it reaches the destination node in which case the nodes that contain the least value of distance from the starting point are all selected to form the ideal path.</p>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

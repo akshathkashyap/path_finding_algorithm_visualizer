@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+{% extends "visualizer/base.html" %}
+  {% block title_block %}visualize{% endblock %}
+
+  {% block body_block %}
+    <div id="fade-title" class="sidebar">
+      <div id="visualize">
+        <button id="start">Visualize</button>
+      </div>
+      <div id="algorithm-dropdown" class="dropdown">
+        <button class="dropdown">Select Algorithm</button>
+      </div>
+      <div id="algorithm-menu">
+          <button style="padding-left: 4em;" id="dijkstra-algorithm" class="dropdown">Dijkstra</button>
+          <button style="padding-left: 4em;" id="astar-algorithm" class="dropdown">A-Star</button>
+          <button style="padding-left: 4em;" id="gbfs-algorithm" class="dropdown">Greedy Best First Search</button>
+      </div>
+      <div id= 'chosen-algorithm'>
+        <button style="padding-left: 4em;" id="algorithm" class="dropdown"></button>
+      </div>
+      <div id="path-node-dropdown" class="dropdown">
+        <button class="dropdown">Select Path Node</button>
+      </div>
+      <div id="path-node-menu">
+          <button style="padding-left: 4em;" id="lowCost">Low Cost</button>
+          <button style="padding-left: 4em;" id="mediumCost">Medium Cost</button>
+          <button style="padding-left: 4em;" id="highCost">High Cost</button>
+      </div>
+      <div id= 'chosen-path-node'>
+        <button style="padding-left: 4em;" id="path-node" class="dropdown"></button>
+      </div>
+      <div>
+        <td><button id="wallNode">Wall Node</button></td>
+        <td><button id="startNode">Start Node</button></td>
+        <td><button id="endNode">End Node</button></td>
+      </div>
+      <div id= "map-settings-dropdown" class="dropdown">
+        <button class="dropdown">Map Settings</button>
+      </div>
+      <div id="map-settings-menu">
+        <label for="size">Size</label>
+        <input style="padding-top: 0.5em; padding-bottom: 0.5em;" type="range" class="form-range" min="10" max="50" step="5" id="size">
+        <label for="size">Rows</label>
+        <input style="padding-top: 0.5em; padding-bottom: 0.5em;" type="range" class="form-range" min="5" max="25" step="1" id="rows">
+        <label for="size">Columns</label>
+        <input style="padding-top: 0.5em; padding-bottom: 0.5em;" type="range" class="form-range" min="10" max="52" step="1" id="columns">
+      </div>
+    </div>
+
+    <div class="map">
+      <table id="mapTable">
+        <tbody>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="color: black;"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell" style="background-color: rgb(255, 244, 79);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(216, 46, 63);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: black;"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="color: black; background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell" style="background-color: rgb(40, 204, 45);"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+        </tbody>
+        <!--<tbody>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+          <tr>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+            <td><button class="cell"></button></td>
+          </tr>
+        </tbody>-->
+      </table>
+    </div>
+  {% endblock %}
